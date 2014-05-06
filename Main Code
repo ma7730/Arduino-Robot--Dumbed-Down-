@@ -1,0 +1,154 @@
+#include <TinkerKit.h>
+#include <Servo.h>
+
+//constants
+Servo motorFL;                   
+Servo motorFR;
+Servo motorBL;
+Servo motorBR;
+Servo mount;
+float inches;
+float duration;
+const int servoPin = 9;
+const int pingPin = 7;
+
+
+//setup
+void setup(){
+  Serial.begin(9600);
+  motorFL.attach(O0);
+  motorFR.attach(O1);
+  motorBL.attach(O2);
+  motorBR.attach(O3);
+  mount.attach(servoPin);
+}
+
+//loop
+void loop(){
+  mount.write(170);
+  //detecting object
+  pinMode(pingPin, OUTPUT);          // Set pin to OUTPUT
+  digitalWrite(pingPin, LOW);        // Ensure pin is low
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);       // Start ranging
+  delayMicroseconds(5);              //   with 5 microsecond burst
+  digitalWrite(pingPin, LOW);        // End ranging
+  pinMode(pingPin, INPUT);           // Set pin to INPUT
+  duration = pulseIn(pingPin, HIGH); // Read echo pulse
+  inches = duration / 74 / 2;   
+	
+  //if encounters objects 
+  if(inches < 2){
+  	delay(1000);
+    motorFL.write(90);
+  	motorFR.write(90);
+  	motorBL.write(90);
+  	motorBR.write(90);
+  	
+  	delay(4000);
+    motorFL.write(0);
+  	motorFR.write(180);
+  	motorBL.write(0);
+  	motorBR.write(0);
+  	delay(2000);
+  	/*
+    motorFL.write(180);
+  	motorFR.write(180);
+  	motorBL.write(180);
+  	motorBR.write(180);
+  	delay(1000);
+  	
+  	motorFL.write(180);
+  	motorFR.write(0);
+  	motorBL.write(0);
+  	motorBR.write(0);
+  	*/
+  	return; 
+  }
+  //keeps going
+  else if (inches >= 2){
+  	motorFL.write(0);
+  	motorFR.write(180);
+  	motorBL.write(180);
+  	motorBR.write(180);
+  }
+}
+
+
+#include <TinkerKit.h>
+#include <Servo.h>
+
+//constants
+Servo motorFL;                   
+Servo motorFR;
+Servo motorBL;
+Servo motorBR;
+Servo mount;
+float inches;
+float duration;
+const int servoPin = 9;
+const int pingPin = 7;
+
+
+//setup
+void setup(){
+  Serial.begin(9600);
+  motorFL.attach(O0);
+  motorFR.attach(O1);
+  motorBL.attach(O2);
+  motorBR.attach(O3);
+  mount.attach(servoPin);
+}
+
+//loop
+void loop(){
+  mount.write(170);
+  //detecting object
+  pinMode(pingPin, OUTPUT);          // Set pin to OUTPUT
+  digitalWrite(pingPin, LOW);        // Ensure pin is low
+  delayMicroseconds(2);
+  digitalWrite(pingPin, HIGH);       // Start ranging
+  delayMicroseconds(5);              //   with 5 microsecond burst
+  digitalWrite(pingPin, LOW);        // End ranging
+  pinMode(pingPin, INPUT);           // Set pin to INPUT
+  duration = pulseIn(pingPin, HIGH); // Read echo pulse
+  inches = duration / 74 / 2;   
+	
+  //if encounters objects 
+  if(inches < 2){
+  	delay(1000);
+    motorFL.write(90);
+  	motorFR.write(90);
+  	motorBL.write(90);
+  	motorBR.write(90);
+  	
+  	delay(4000);
+    motorFL.write(0);
+  	motorFR.write(180);
+  	motorBL.write(0);
+  	motorBR.write(0);
+  	delay(2000);
+  	/*
+    motorFL.write(180);
+  	motorFR.write(180);
+  	motorBL.write(180);
+  	motorBR.write(180);
+  	delay(1000);
+  	
+  	motorFL.write(180);
+  	motorFR.write(0);
+  	motorBL.write(0);
+  	motorBR.write(0);
+  	*/
+  	return; 
+  }
+  //keeps going
+  else if (inches >= 2){
+  	motorFL.write(0);
+  	motorFR.write(180);
+  	motorBL.write(180);
+  	motorBR.write(180);
+  }
+}
+
+
